@@ -64,180 +64,7 @@ const eventRows = totalCamera.map((camera) => ({
   })),
 }));
 
-  // const eventRows = [
-  //   {
-  //     id: "01",
-  //     events: [
-  //       {
-  //         type: "unauthorised",
-  //         tsStart: "00:05",
-  //         tsEnd: "00:07",
-  //       },
-  //       {
-  //         type: "face",
-  //         tsStart: "01:10",
-  //         tsEnd: "01:12",
-  //       },
-  //       {
-  //         type: "multiple",
-  //         tsStart: "02:15",
-  //         tsEnd: "02:17",
-  //       },
-  //       {
-  //         type: "gun",
-  //         tsStart: "03:20",
-  //         tsEnd: "03:22",
-  //       },
-  //       {
-  //         type: "unauthorised",
-  //         tsStart: "04:25",
-  //         tsEnd: "04:27",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "02",
-  //     events: [
-  //       {
-  //         type: "unauthorised",
-  //         tsStart: "05:30",
-  //         tsEnd: "05:32",
-  //       },
-  //       {
-  //         type: "face",
-  //         tsStart: "06:35",
-  //         tsEnd: "06:37",
-  //       },
-  //       {
-  //         type: "aggressive", // Same time as face event above - will stack
-  //         tsStart: "06:35",
-  //         tsEnd: "06:37",
-  //       },
-  //       {
-  //         type: "loitering",
-  //         tsStart: "07:40",
-  //         tsEnd: "07:42",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "03",
-  //     events: [
-  //       {
-  //         type: "traffic",
-  //         tsStart: "08:00",
-  //         tsEnd: "08:02",
-  //       },
-  //       {
-  //         type: "unauthorised",
-  //         tsStart: "09:05",
-  //         tsEnd: "09:07",
-  //       },
-  //       {
-  //         type: "blacklisted",
-  //         tsStart: "10:10",
-  //         tsEnd: "10:12",
-  //       },
-  //       {
-  //         type: "intrusion",
-  //         tsStart: "11:15",
-  //         tsEnd: "11:17",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "04",
-  //     events: [
-  //       {
-  //         type: "suspicious",
-  //         tsStart: "12:20",
-  //         tsEnd: "12:22",
-  //       },
-  //       {
-  //         type: "abandoned",
-  //         tsStart: "13:25",
-  //         tsEnd: "13:27",
-  //       },
-  //       {
-  //         type: "shoplifting",
-  //         tsStart: "14:30",
-  //         tsEnd: "14:32",
-  //       },
-  //       {
-  //         type: "shoplifting",
-  //         tsStart: "14:30",
-  //         tsEnd: "14:32",
-  //       },
-  //       {
-  //         type: "shoplifting",
-  //         tsStart: "14:30",
-  //         tsEnd: "14:32",
-  //       },
-  //       {
-  //         type: "shoplifting",
-  //         tsStart: "14:30",
-  //         tsEnd: "14:32",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "05",
-  //     events: [
-  //       {
-  //         type: "gun",
-  //         tsStart: "15:35",
-  //         tsEnd: "15:37",
-  //       },
-  //       {
-  //         type: "face",
-  //         tsStart: "16:40",
-  //         tsEnd: "16:42",
-  //       },
-  //       {
-  //         type: "unauthorised",
-  //         tsStart: "17:45",
-  //         tsEnd: "17:47",
-  //       },
-  //       {
-  //         type: "tailgating",
-  //         tsStart: "18:50",
-  //         tsEnd: "18:52",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "06",
-  //     events: [
-  //       {
-  //         type: "mask",
-  //         tsStart: "19:55",
-  //         tsEnd: "19:57",
-  //       },
-  //       {
-  //         type: "face-not-recognized",
-  //         tsStart: "20:00",
-  //         tsEnd: "20:02",
-  //       },
-  //       {
-  //         type: "unauthorised",
-  //         tsStart: "21:05",
-  //         tsEnd: "21:07",
-  //       },
-  //       {
-  //         type: "gun", // Same time as unauthorised event above - will stack
-  //         tsStart: "21:05",
-  //         tsEnd: "21:07",
-  //       },
-  //       {
-  //         type: "aggressive",
-  //         tsStart: "22:10",
-  //         tsEnd: "22:12",
-  //       },
-  //     ],
-  //   },
-  // ];
 
-  // Function to calculate row position based on index
   const calculateRowPosition = (rowIndex: number): number => {
     const ROW_HEIGHT = 80; // Height of each row in pixels
     return rowIndex * ROW_HEIGHT;
@@ -449,18 +276,19 @@ const eventRows = totalCamera.map((camera) => ({
     };
 
     if (isDragging) {
-      document.addEventListener("mousemove", handleMove);
+      // ts-ignore
+      document.addEventListener("mousemove", handleMove as any);
       document.addEventListener("mouseup", handleMouseUp);
-      document.addEventListener("touchmove", handleTouchMove, {
+      document.addEventListener("touchmove", handleTouchMove as any, {
         passive: false,
       });
       document.addEventListener("touchend", handleMouseUp);
     }
 
     return () => {
-      document.removeEventListener("mousemove", handleMove);
+      document.removeEventListener("mousemove", handleMove as any);
       document.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchmove", handleTouchMove as any);
       document.removeEventListener("touchend", handleMouseUp);
     };
   }, [handleMouseMove, isDragging]);
@@ -543,18 +371,18 @@ const eventRows = totalCamera.map((camera) => ({
     };
 
     if (isIndicatorDragging) {
-      document.addEventListener("mousemove", handleMove);
+      document.addEventListener("mousemove", handleMove as any );
       document.addEventListener("mouseup", handleIndicatorMouseUp);
-      document.addEventListener("touchmove", handleTouchMove, {
+      document.addEventListener("touchmove", handleTouchMove as any, {
         passive: false,
       });
       document.addEventListener("touchend", handleIndicatorMouseUp);
     }
 
     return () => {
-      document.removeEventListener("mousemove", handleMove);
+      document.removeEventListener("mousemove", handleMove as any);
       document.removeEventListener("mouseup", handleIndicatorMouseUp);
-      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchmove", handleTouchMove as any);
       document.removeEventListener("touchend", handleIndicatorMouseUp);
     };
   }, [handleIndicatorMove, isIndicatorDragging]);
