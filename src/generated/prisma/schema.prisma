@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Camera {
+  id            String     @id @default(cuid())
+  name          String
+  location      String
+  liveStreamUrl String
+  incidents     Incident[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Incident {
+  id           String   @id @default(cuid())
+  cameraId     String
+  camera       Camera   @relation(fields: [cameraId], references: [id])
+  type         String // e.g., "Unauthorized Access", "Gun Threat", "Face Recognised"
+  threatLevel  Int // 1-5
+  tsStart      DateTime
+  tsEnd        DateTime
+  thumbnailUrl String
+  resolved     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
