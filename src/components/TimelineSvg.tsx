@@ -1,11 +1,19 @@
-import React from 'react'
+import React from "react";
 
-type Props = { offset: number; isDragging: boolean; timelineRef: React.RefObject<SVGSVGElement |null>; TIMELINE_WIDTH: number; };
+type Props = {
+  offset: number;
+  isDragging: boolean;
+  timelineRef: React.RefObject<SVGSVGElement | null>;
+  TIMELINE_WIDTH: number;
+};
 
-const TimelineSvg = ({ offset, isDragging, timelineRef, TIMELINE_WIDTH,  }: Props) => {
-
-
-      // Generate hour markers
+const TimelineSvg = ({
+  offset,
+  isDragging,
+  timelineRef,
+  TIMELINE_WIDTH,
+}: Props) => {
+  // Generate hour markers
   const generateHourMarkers = () => {
     const markers = [];
     for (let i = 0; i <= 24; i++) {
@@ -67,19 +75,6 @@ const TimelineSvg = ({ offset, isDragging, timelineRef, TIMELINE_WIDTH,  }: Prop
               stroke={color}
               strokeWidth={strokeWidth}
             />
-            {/* {is30Minute && (
-              <text
-                x={x}
-                y={50}
-                textAnchor="middle"
-                fontSize="11"
-                fill={color}
-                fontWeight="600"
-              >
-                {hour.toString().padStart(2, "0")}:
-                {minute.toString().padStart(2, "0")}
-              </text>
-            )} */}
           </g>
         );
       }
@@ -88,54 +83,30 @@ const TimelineSvg = ({ offset, isDragging, timelineRef, TIMELINE_WIDTH,  }: Prop
   };
   return (
     <svg
-          ref={timelineRef}
-          width={TIMELINE_WIDTH}
-          height="30"
-          style={{
-            transform: `translateX(-${offset}px)`,
-            transition: isDragging ? "none" : "transform 0.1s ease",
-          }}
-          className="select-none"
-        >
-          {/* Background */}
-          <rect
-            width={TIMELINE_WIDTH}
-            height="30"
-            fill="#131313"
-            className="px-4"
-          />
+      ref={timelineRef}
+      width={TIMELINE_WIDTH}
+      height="30"
+      style={{
+        transform: `translateX(-${offset}px)`,
+        transition: isDragging ? "none" : "transform 0.1s ease",
+      }}
+      className="select-none"
+    >
+      {/* Background */}
+      <rect
+        width={TIMELINE_WIDTH}
+        height="30"
+        fill="#131313"
+        className="px-4"
+      />
 
-          {/* Hour markers */}
-          {generateHourMarkers()}
+      {/* Hour markers */}
+      {generateHourMarkers()}
 
-          {/* 5-minute markers with increased spacing */}
-          {generate5MinuteMarkers()}
-
-          {/* Current time indicator
-          <g>
-            <line
-              x1={currentTimeX}
-              y1={20}
-              x2={currentTimeX}
-              y2={0}
-              stroke="#ef4444"
-              strokeWidth={3}
-            />
-            <circle cx={currentTimeX} cy={90} r={6} fill="#ef4444" />
-            <text
-              x={currentTimeX}
-              y={15}
-              textAnchor="middle"
-              fontSize="10"
-              fill="#ef4444"
-              fontWeight="bold"
-              className=""
-            >
-              NOW
-            </text>
-          </g> */}
-        </svg>
-  )
-}
+      {/* 5-minute markers with increased spacing */}
+      {generate5MinuteMarkers()}
+    </svg>
+  );
+};
 
 export default TimelineSvg;

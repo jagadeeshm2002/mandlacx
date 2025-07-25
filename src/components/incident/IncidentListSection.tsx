@@ -78,21 +78,7 @@ const ThreatCountColorIndicator = ({
   );
 };
 
-const ThreatLevelIndicator = ({
-  threatLevel,
-}: {
-  threatLevel: number;
-}): string => {
-  const colors = [
-    "bg-green-900",
-    "bg-yellow-900",
-    "bg-orange-900",
-    "bg-red-900",
-    "bg-purple-900",
-  ];
 
-  return colors[threatLevel - 1];
-};
 
 const IncidentName = ({ incident }: { incident: Incident }): JSX.Element => {
   const threat = humanThreats.find((threat) => threat.id === incident.type) || {

@@ -61,6 +61,13 @@ const navItems = [
     label: "Users",
     link: "/users",
   },
+  {
+    icon: (
+      <Camera className="w-4 h-4 stroke-black/50 fill-accent-foreground stroke-1" />
+    ),
+    label: "3D View",
+    link: "/3dpage",
+  },
 ];
 
 type Props = {};

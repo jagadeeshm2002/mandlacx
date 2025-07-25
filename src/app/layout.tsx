@@ -41,11 +41,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} {${jakartaSans.variable} ${inter.variable}} antialiased `}
       >
-        <div className="font-sans bg-gradient-to-b to-[#000000] from-[#151515] min-h-screen relative ">
-          <div className="w-[800px] h-[100px] absolute bg-yellow-500 -top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full blur-[500px]" />
-          <Header />
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );
