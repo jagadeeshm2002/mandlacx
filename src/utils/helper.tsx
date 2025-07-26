@@ -10,14 +10,12 @@ import {
 } from "three";
 import * as THREE from "three";
 
-
-
 // Light Helpers Component with Ambient Light
 export function LightHelpers() {
   // Create refs for each light (ambient doesn't need ref)
-  const directionalRef = useRef(THREE.DirectionalLight);
-  const pointRef = useRef(THREE.PointLight);
-  const spotRef = useRef(THREE.SpotLight);
+  const directionalRef = useRef<THREE.DirectionalLight>(null);
+  const pointRef = useRef<THREE.PointLight>(null);
+  const spotRef = useRef<THREE.SpotLight>(null);
 
   // Your light controls
   const {
@@ -78,18 +76,22 @@ export function LightHelpers() {
 
   // Attach helpers conditionally
   useHelper(
-    showDirectionalHelper && directionalRef,
+    showDirectionalHelper ? directionalRef : null,
     DirectionalLightHelper,
     helperSize,
     directionalColor
   );
   useHelper(
-    showPointHelper && pointRef,
+    showPointHelper ? pointRef : null,
     PointLightHelper,
     helperSize,
     pointColor
   );
-  useHelper(showSpotHelper && spotRef, SpotLightHelper, spotColor);
+  useHelper(
+    showSpotHelper ? spotRef : null,
+    SpotLightHelper,
+    spotColor
+  );
 
   return (
     <>
@@ -131,7 +133,7 @@ export function LightHelpers() {
 export function CameraController() {
   const { camera } = useThree();
 
-  const { position, fov } = useControls("Camera", {
+  const { position, fov, showCameraHelper } = useControls("Camera", {
     position: {
       value: [0, 2, 8],
       step: 0.5,
@@ -142,12 +144,18 @@ export function CameraController() {
       max: 170,
       step: 1,
     },
+    showCameraHelper: false,
   });
+
+  // Optional: Add camera helper
+  useHelper(showCameraHelper ? camera : null, CameraHelper);
 
   useEffect(() => {
     camera.position.set(...position);
-    camera.fov = fov;
-    camera.updateProjectionMatrix();
+    if ('fov' in camera) {
+      (camera as THREE.PerspectiveCamera).fov = fov;
+      camera.updateProjectionMatrix();
+    }
   }, [camera, position, fov]);
 
   return null;
