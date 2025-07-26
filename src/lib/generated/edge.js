@@ -140,7 +140,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\jagad\\Videos\\projects\\mandlacx\\src\\generated\\prisma",
+      "value": "C:\\Users\\jagad\\Videos\\projects\\mandlacx\\src\\lib\\generated",
       "fromEnvVar": null
     },
     "config": {
@@ -158,7 +158,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -177,8 +177,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Camera {\n  id            String     @id @default(cuid())\n  name          String\n  location      String\n  liveStreamUrl String\n  incidents     Incident[]\n  createdAt     DateTime   @default(now())\n  updatedAt     DateTime   @updatedAt\n}\n\nmodel Incident {\n  id           String   @id @default(cuid())\n  cameraId     String\n  camera       Camera   @relation(fields: [cameraId], references: [id])\n  type         String // e.g., \"Unauthorized Access\", \"Gun Threat\", \"Face Recognised\"\n  threatLevel  Int // 1-5\n  tsStart      DateTime\n  tsEnd        DateTime\n  thumbnailUrl String\n  resolved     Boolean  @default(false)\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n}\n",
-  "inlineSchemaHash": "a3d15711e74d5c29a813bceb30152158e6339d3d34140ad9fb372ba52267d03a",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/lib/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Camera {\n  id            String     @id @default(cuid())\n  name          String\n  location      String\n  liveStreamUrl String\n  incidents     Incident[]\n  createdAt     DateTime   @default(now())\n  updatedAt     DateTime   @updatedAt\n}\n\nmodel Incident {\n  id           String   @id @default(cuid())\n  cameraId     String\n  camera       Camera   @relation(fields: [cameraId], references: [id])\n  type         String // e.g., \"Unauthorized Access\", \"Gun Threat\", \"Face Recognised\"\n  threatLevel  Int // 1-5\n  tsStart      DateTime\n  tsEnd        DateTime\n  thumbnailUrl String\n  resolved     Boolean  @default(false)\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n}\n",
+  "inlineSchemaHash": "cff8653015185896fa6cb52c1cd9768b1430bc5269be3db6ea94b7fe1e3a55c9",
   "copyEngine": true
 }
 config.dirname = '/'
