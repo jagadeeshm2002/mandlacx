@@ -13,9 +13,10 @@ import * as THREE from "three";
 // Light Helpers Component with Ambient Light
 export function LightHelpers() {
   // Create refs for each light (ambient doesn't need ref)
-  const directionalRef = useRef<THREE.DirectionalLight>(null);
-  const pointRef = useRef<THREE.PointLight>(null);
-  const spotRef = useRef<THREE.SpotLight>(null);
+  const directionalRef = useRef<THREE.DirectionalLight>(null!);
+  const pointRef = useRef<THREE.PointLight>(null!);
+  const spotRef = useRef<THREE.SpotLight>(null!);
+  
 
   // Your light controls
   const {
@@ -152,7 +153,7 @@ export function CameraController() {
 
   // Optional: Add camera helper
   // ts-ignore
-  useHelper(showCameraHelper ? camera : null, CameraHelper);
+  useHelper(showCameraHelper ? (camera as any) : null , CameraHelper);
 
   useEffect(() => {
     camera.position.set(...position);
