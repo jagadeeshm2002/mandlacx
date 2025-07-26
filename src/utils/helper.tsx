@@ -75,18 +75,21 @@ export function LightHelpers() {
   });
 
   // Attach helpers conditionally
+  // ts-ignore
   useHelper(
     showDirectionalHelper ? directionalRef : null,
     DirectionalLightHelper,
     helperSize,
     directionalColor
   );
+  // ts-ignore
   useHelper(
     showPointHelper ? pointRef : null,
     PointLightHelper,
     helperSize,
     pointColor
   );
+  // ts-ignore
   useHelper(
     showSpotHelper ? spotRef : null,
     SpotLightHelper,
@@ -148,6 +151,7 @@ export function CameraController() {
   });
 
   // Optional: Add camera helper
+  // ts-ignore
   useHelper(showCameraHelper ? camera : null, CameraHelper);
 
   useEffect(() => {
